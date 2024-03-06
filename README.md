@@ -4,3 +4,6 @@ A video controller that manipulates the speed of videos. On YouTube advisements,
 # USE 
 
 To add to your Chrome you will need to enable developer mode for extensions and load the folder in "load Unpacked."
+
+
+I'll add more and better fetures later. 
