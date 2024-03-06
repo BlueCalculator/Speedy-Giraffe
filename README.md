@@ -1,9 +1,9 @@
 # Speedy-Giraffe
-A video controller that manipulates the speed of videos. On YouTube advisements, it will increase the speed by 16x (highest amount of fast-forwarding) to quickly skip ads automatically.
+A video controller that manipulates the speed of videos. Now on YouTube, the controller will set the video content time to video duration skipping the ad completely. This is faster and more effective than increasing video speed by 16x as before. 
 
 # USE 
 
 To add to your Chrome you will need to enable developer mode for extensions and load the folder in "load Unpacked."
 
 
-I'll add more and better fetures later. 
+I'll add more and better features later. 
