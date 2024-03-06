@@ -1,5 +1,5 @@
 # Speedy-Giraffe
-A video controller that manipulates the speed of videos. Now on YouTube, the controller will set the video content time to video duration skipping the ad completely. This is faster and more effective than increasing video speed by 16x as before. 
+Now on YouTube, the controller will set the video content time to video duration skipping the ad completely. This is faster and more effective than increasing video speed by 16x as before. 
 
 # USE 
 
