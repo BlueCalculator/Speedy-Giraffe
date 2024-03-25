@@ -1,7 +1,7 @@
 {
     "name": "Speedy Giraffe",
     "version": "1.0.0",
-    "description": "A video controller that manipulates the speed of videos. On Youtube advisements it will increase the speed by 16x (highest amount of fast-forwarding) to quickly skip ads automatically.",
+    "description": "A video controller that manipulates the speed of videos. On Youtube it will skip the video automatically.",
     "manifest_version": 3,
     "action":{
         "default_title": "Speedy Giraffe"
