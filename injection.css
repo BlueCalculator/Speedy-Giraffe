@@ -1,0 +1,12 @@
+.my-custom-class {
+    background-color: lightblue;
+    padding: 10px;
+    border: 1px solid blue;
+    position: absolute;
+    top: 0px;
+    z-index: 1000;
+}
+
+.another-class {
+    /* Add additional styling here */
+}
