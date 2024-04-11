@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Form Data Extension",
+  "name": "Speedy Giraffe",
   "version": "1.0",
-  "description": "Pass form data from popup to content script using chrome.storage.local",
+  "description": "A video controller that manipulates the speed of videos. On YouTube advisements, it will set the current time to video duration skipping the advertisement entirely automatically.",
   "permissions": ["activeTab", "storage"],
   "background": {
     "service_worker": "background.js"
