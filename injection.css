@@ -1,0 +1,16 @@
+#MediaPanel {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    /* transform: translate(-10%, -10%); */
+    background-color: transparent;
+    /* width: 150px;
+    height: 80px; */
+    cursor: move;
+    z-index: 99999;
+}
+
+.FFButton {
+    width: 33.33%;
+    height: 100%;
+}
