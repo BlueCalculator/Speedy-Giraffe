@@ -1,7 +1,9 @@
 # Speedy-Giraffe
-#Who likes **ADs**? <br>
-<img src="./saw-laptop.gif"> <br><br>
-Now on YouTube, the controller will set the video content time to video duration skipping the ad completely. This is faster and more effective than increasing video speed by 16x as before. 
+### Who likes **ADs**? <br>
+<img src="./saw-laptop.gif"> 
+<br><br>
+Now with this Chrome extension, on YouTube or any other video, the controller will set the video content time to video duration skipping the ad completely. This is faster and more effective than increasing video speed by 16x as before. 
+**Also** This Chrome extension can manipulate your video. Like toggleable fast-forward, skipping forward and backward! You can also set different skip amounts and video speed amounts. 
 
 # USE 
 
