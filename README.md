@@ -7,5 +7,3 @@ With this Chrome extension, you can now skip ads entirely on YouTube and other v
 # USE 
 
 To add to your Chrome you will need to enable developer mode for extensions and load the folder in "load Unpacked"
-
-I'll add more and better features later. 
