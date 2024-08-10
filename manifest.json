@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Speedy Giraffe",
-  "version": "1.0",
-  "description": "A video controller that manipulates the speed of videos. On YouTube advisements, it will set the current time to video duration skipping the advertisement entirely automatically.",
+  "version": "1.3.0",
+  "description": "Video Manipulator",
   "permissions": ["activeTab", "storage"],
   "background": {
     "service_worker": "background.js"

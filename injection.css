@@ -4,13 +4,58 @@
     left: 50%;
     /* transform: translate(-10%, -10%); */
     background-color: transparent;
-    /* width: 150px;
-    height: 80px; */
+    /* width: 150px; */
+    /* height: 80px;  */
     cursor: move;
     z-index: 99999;
 }
 
 .FFButton {
-    width: 33.33%;
+    width: 20%;
     height: 100%;
+}
+
+.BookmarkPopup {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    width: 500px;
+    height: 100px;
+    background-color: rgba(211, 211, 211, 0.459);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    gap: 10px;
+}
+
+.BookmarkPopup p {
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+}
+
+.NotesFormInput {
+    width: 95%; 
+}
+
+.ButtonBar {
+    display: flex;
+    gap: 10px;
+}
+
+.sucsessBookarkCreated{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 25px;
+    position: absolute;
+    width: 350px;
+    height: 35px;
+    bottom: 5%;
+    left: 2%;
+    z-index: 99999;
+    background-color: #34b233;
 }

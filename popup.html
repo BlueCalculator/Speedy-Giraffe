@@ -4,12 +4,18 @@
   <title>Popup</title>
   <script src="popup.js"></script>
   <link rel="stylesheet" href="popup.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-  <b>NOTE - keybind is alt + keybind</b>
+  <div id="Bookmarks">
+    <h1>Bookmarks</h1>
+    <div id="container"></div>
+  </div>
+<div class="main">
+  <h4>Shortcut = alt + keybind</h4>
   <form id="form1">
-    <label for="inputData1">Forward key:</label>
-    <input type="text" id="inputData1" name="inputData1" maxlength="1">
+    <label for="inputData1">Forward Key:</label>
+    <input  type="text"  id="inputData1" name="inputData1" max="1">
   </form>
   <form id="form3">
     <label for="inputData1">Reverse Key</label>
@@ -20,7 +26,7 @@
     <input type="number" id="skipAmount" name="skipAmount" min="1">
   </form>
   <form id="form4">
-    <label for="inputData1">Forward key</label>
+    <label for="inputData1">Forward Key</label>
     <input type="text" id="inputData4" name="inputData4" maxlength="1">
   </form>
   <form id="form5">
@@ -31,22 +37,58 @@
     <label for="Toggleable">Toggleable Fast Forwarding</label>
     <input type="checkbox" id="toggleable" name="toggleable">
   </form>
+  <form id="form10">
+    <label for="inputData10">Bookmark Current Time:</label>
+    <input type="text" id="Bookmark" name="bookmark" maxlength="1">
+  </form>
+  <button id="BookmarkButton">Bookmarks</button>
   <form id="form7">
     <label for="onScreen">On Screen Controls</label>
     <input type="checkbox" id="onScreen" name="onScreen">
   </form>
-  <form id="form8">
-    <label for="mediawidth">Width of Popup in px</label>
-    <input type="number" id="mediawidth" name="mediawidth" min="150">
-  </form>
-  <form id="form9">
-    <label for="mediaheight">height of Popup in px</label>
-    <input type="number" id="mediaheight" name="mediaheight" min="80">
-  </form>
-  <br>
+  <div id="mediaSettings">
+    <form id="form8">
+      <label for="mediawidth">Width of Popup in px</label>
+      <input type="number" id="mediawidth" name="mediawidth" min="150">
+    </form>
+    <form id="form9">
+      <label for="mediaheight">height of Popup in px</label>
+      <input type="number" id="mediaheight" name="mediaheight" min="80">
+    </form>
+  </div>
+  <button id="advancedButton">Advanced Settings</button>
+    <div id="advancedSettings">
+      <form id="form11">
+        <label for="onScreen">Auto Skip Ads</label>
+        <input type="checkbox" id="onScreen" name="onScreen">
+      </form>
+      <div class="autoSkipLevels">
+        <form id="form13">
+          <label for="skipOption">What Kind Skipping Method</label>
+          <select name="skipOption" id="skipOption">
+            <option value="skip1">Skip 16x</option>
+            <option value="skip2">Skip By Duration</option>
+          </select>
+        </form>
+      </div>
+      <form id="form12">
+        <label for="videoPause">Start Video Paused</label>
+        <input type="checkbox" id="videoPause" name="videoPause">
+      </form>
+    </div>
+
+
   <button id="submitButton" type="submit">Save</button>
+  <p>Brought to life by <a href="https://github.com/BlueCalculator/Speedy-Giraffe" target="_blank">Blue Calculator</a></p>
+</div>
+
+  
 
 
-    <p>By <a href="https://github.com/BlueCalculator/Speedy-Giraffe" target="_blank">Blue Calculator</a></p>
+
+
+
+  <script src="advancedSettings.js"></script>
+  <script src="bookmark.js"></script>
 </body>
 </html>

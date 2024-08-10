@@ -19,6 +19,12 @@ fetchDataFromLocalStorage("form6");
 fetchDataFromLocalStorage("form7");
 fetchDataFromLocalStorage("form8");
 fetchDataFromLocalStorage("form9");
+fetchDataFromLocalStorage("form10");
+fetchDataFromLocalStorage("form12")
+fetchDataFromLocalStorage("BookmarkInfo");
+fetchDataFromLocalStorage("currentBookmarkSet");
+
+
 
 chrome.storage.onChanged.addListener(function(changes, areaName) {
   Object.keys(changes).forEach(function(key) {
@@ -37,9 +43,11 @@ let toggleSPEED;
 let MediaControlls;
 let mediawidth;
 let mediaheight;
+let BookmarkInfo;
+let currentBookmarkSet
+let startVideoPaused
 
 function setVariables() {
-  if (formData["form1"] && formData["form2"] && formData["form3"] && formData["form4"] && formData["form5"] && formData["form6"]) {
     ffkey = formData["form1"];
     fftime = formData["form2"];
     bbkey = formData["form3"];
@@ -49,12 +57,16 @@ function setVariables() {
     MediaControlls = formData["form7"];
     mediawidth = formData["form8"]
     mediaheight = formData["form9"]
-    console.log(toggleSPEED, MediaControlls)
+    ButtonforBookmark = formData["form10"]
+    BookmarkInfo = formData["BookmarkInfo"]
+    currentBookmarkSet = formData["currentBookmarkSet"]
+    startVideoPaused = formData["form12"]
     MediaController()
-  } else {
-    console.log("Input data for the form isn't available.");
-  }
+    BookmarkTriggerSet()
 }
+
+
+
 
 //  ____                           _ 
 // / ___| ___ _ __   ___ _ __ __ _| |
@@ -62,7 +74,13 @@ function setVariables() {
 //| |_| |  __/ | | |  __/ | | (_| | |
 // \____|\___|_| |_|\___|_|  \__,_|_|
                                   
-                                  
+   
+setTimeout(() => {
+  if (startVideoPaused === true){
+    videoID().pause()
+  }
+}, 1);
+
 
 
 addEventListener("keydown", (event) => {
@@ -72,7 +90,11 @@ addEventListener("keydown", (event) => {
   if(event.key === bbkey && event.altKey) {
     bbskiptime()
   }
+  if(event.key === ButtonforBookmark && event.altKey) {
+    addBookmark()
+  }
 });
+
 
 
   let originalPlaybackSpeed;
@@ -132,10 +154,11 @@ addEventListener("keydown", (event) => {
       }
     });
 
-setInterval(time, 100)
+setInterval(time, 1000)
 function time() {
     if (document.querySelector("div.ad-showing")) { 
-            videoID().currentTime = videoID().duration;
+            // videoID().currentTime = videoID().duration;
+            // document.querySelector('video').playbackRate = 16.0;
         }
 }
 
@@ -146,28 +169,152 @@ function time() {
                                               
 const MediaPanel = document.createElement("div");
 const fastForward = document.createElement("button");
-// const reverse = document.createElement("button");
+const pausePlay = document.createElement("button");
 const skipTime = document.createElement("button");
 const reverseTime = document.createElement("button");
-
+const bookmarkTime = document.createElement("button");
 
 //Media panel
 MediaPanel.id = 'MediaPanel';
-
+MediaPanel.innerHTML = "<link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">"
 
 //FastForward Button
-fastForward.textContent = ">>"
+fastForward.innerHTML = "<i class=\"material-icons\">fast_forward</i>"
 fastForward.addEventListener("mousedown", fforward)
 fastForward.addEventListener("mouseup", stopChangingSpeed)
 fastForward.className = "FFButton"
 
+// PausePlay Button
+ 
+
+
+pausePlay.innerHTML = "<i class=\"material-icons\">pause</i>"
+pausePlay.className = "FFButton"
+pausePlay.addEventListener("mousedown", PausePlayFunction)
+
+function PausePlayFunction() {
+  if (videoID().paused) {
+      videoID().play();
+      pausePlay.innerHTML = "<i class=\"material-icons\">pause</i>"
+    } else {
+      videoID().pause();
+      pausePlay.innerHTML = "<i class=\"material-icons\">play_arrow</i>"
+  }
+}
+
+//Bookmark Time 
+
+bookmarkTime.innerHTML = "<i class=\"material-icons\">bookmark</i>"
+bookmarkTime.className = "FFButton"
+bookmarkTime.addEventListener("mousedown", addBookmark)
+
+videoTimeSavePoint = null;
+
+function addBookmark(){
+  videoTimeSavePoint = videoID().currentTime
+  BookmarkNotesAssigner.value = document.title + " -- " + formatTime(videoID().currentTime)
+  BookmarkPopup.append(formName, BookmarkNotesAssigner, buttonBar)
+  document.body.appendChild(BookmarkPopup)
+}
+
+//Bookmark Body
+const BookmarkPopup = document.createElement("div");
+BookmarkPopup.className = "BookmarkPopup"
+
+//form Header
+const formName = document.createElement("p");
+formName.innerHTML = "Name Your Bookmark"
+
+//bookmark input 
+const BookmarkNotesAssigner = document.createElement("input");
+BookmarkNotesAssigner.type = "text"
+BookmarkNotesAssigner.className = "NotesFormInput"
+
+//Save Bookmark
+const saveBookmark = document.createElement("button");
+saveBookmark.type = "submit"
+saveBookmark.innerHTML = "Save"
+saveBookmark.id = "saveBookmarkBookmark"
+saveBookmark.addEventListener("mousedown", SaveCurrentBookmark)
+
+function cleanString(str) {
+  return str.replace(/([“”"'])/g, '\\$1');
+}
+
+var sucsessBookarkCreated = document.createElement("div");
+sucsessBookarkCreated.className = "sucsessBookarkCreated"
+sucsessBookarkCreated.innerHTML = '<p>Bookmark Successfully Made!</p>'
+
+function SaveCurrentBookmark(){
+  document.body.appendChild(sucsessBookarkCreated)
+  BookmarkNoteName = BookmarkNotesAssigner.value
+  cleanedBookmarknameNote = cleanString(BookmarkNoteName)
+  document.body.removeChild(BookmarkPopup)
+  BookmarkInfoItem = { Note: cleanedBookmarknameNote, Time: videoTimeSavePoint, link: window.location.href};
+  BookmarkInfo.push(BookmarkInfoItem)
+
+  chrome.storage.local.set({
+    "BookmarkInfo" : BookmarkInfo
+  }, function() {
+    console.log("Data saved to local storage");
+  });
+
+  setTimeout(deleteBookmarkSucess, 1000)
+}
+
+function deleteBookmarkSucess(){
+  document.body.removeChild(sucsessBookarkCreated)
+}
+
+
+//Cancel Bookmark
+const cancelBookmark = document.createElement("button");
+cancelBookmark.type = "submit"
+cancelBookmark.innerHTML = "Cancel"
+cancelBookmark.id = "cancelBookmarkBookmark"
+cancelBookmark.addEventListener("mousedown", cancelClose)
+
+function cancelClose(){
+  document.body.removeChild(BookmarkPopup)
+}
+
+const buttonBar = document.createElement("div")
+buttonBar.className = "ButtonBar"
+buttonBar.append(cancelBookmark, saveBookmark)
+
+//Set Time 
+
+function BookmarkTriggerSet(){
+  if(currentBookmarkSet.link == window.location.href){
+//CHECK FOR ADS ON YOUTUBE
+    setTimeout(() => {
+      videoID().currentTime = currentBookmarkSet.Time
+    chrome.storage.local.set({
+      "currentBookmarkSet" : "null"
+    }, function() {
+      console.log("Data saved to local storage");
+    });
+    }, 1);
+  }
+}
+
+//format time
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+
+
+
 //Skip Time
-skipTime.textContent = ">"
+skipTime.innerHTML = "<i class=\"material-icons\">arrow_forward_ios</i>"
 skipTime.addEventListener("mousedown", ffskiptime)
 skipTime.className = "FFButton"
 
 //Reverse Time
-reverseTime.textContent = "<"
+reverseTime.innerHTML = "<i class=\"material-icons\">arrow_back_ios</i>"
 reverseTime.addEventListener("mousedown", bbskiptime)
 reverseTime.className = "FFButton"
 
@@ -193,8 +340,7 @@ MediaPanel.addEventListener("mousedown", handleMouseDown);
 function MediaController() {
   if(MediaControlls === true && isVideoThere()) {
     document.body.appendChild(MediaPanel);
-    MediaPanel.append(reverseTime, skipTime, fastForward);
-
+    MediaPanel.append(reverseTime, pausePlay ,skipTime, fastForward, bookmarkTime);
     MediaPanel.style.width = mediawidth + "px";
     MediaPanel.style.height = mediaheight + "px";
   }else{
@@ -210,5 +356,3 @@ function isVideoThere(){
 function videoID() {
   return document.querySelector("video");
 }
-
-
