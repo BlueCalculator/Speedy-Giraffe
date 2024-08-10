@@ -157,8 +157,8 @@ addEventListener("keydown", (event) => {
 setInterval(time, 1000)
 function time() {
     if (document.querySelector("div.ad-showing")) { 
-            // videoID().currentTime = videoID().duration;
-            // document.querySelector('video').playbackRate = 16.0;
+            videoID().currentTime = videoID().duration;
+            //document.querySelector('video').playbackRate = 16.0;
         }
 }
 
